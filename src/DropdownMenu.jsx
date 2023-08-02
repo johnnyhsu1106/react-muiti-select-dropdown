@@ -7,10 +7,17 @@ const DropdownMenu = ({
 }) => {
 
   const [isMenuOpened, setIsMenuOpened] = useState(false);
-  const [highlightedOptionIndex, setHighlightedOptionIndex] = useState();
+  const [highlightedOptionIndex, setHighlightedOptionIndex] = useState(0);
   const containerRef = useRef();
 
+  // Default highlighted option
+  useEffect(() => {
+    if (isMenuOpened) {
+      setHighlightedOptionIndex(0);
+    }
+  }, [isMenuOpened]);
 
+  // Keyboard event
   useEffect(() => {
     const handler = (e) => {
       if (e.target !== containerRef.current) {
@@ -34,7 +41,7 @@ const DropdownMenu = ({
             handleDropdownMenuOpen();
             break;
           }
-          
+
           const newHighlightedOptionIndex = highlightedOptionIndex + (code === "ArrowDown" ? 1 : -1)
           handleHighlightedOptionSelect(newHighlightedOptionIndex);
           
@@ -96,7 +103,7 @@ const DropdownMenu = ({
   }
 
   const handleOptionsOnMouseEnter = (index) => {
-    setHighlightedOptionIndex(index);
+    handleHighlightedOptionSelect(index);
   }
 
   const handleSelectedOptionsRender = () => {
@@ -158,14 +165,12 @@ const DropdownMenu = ({
               key={value}
               className={`option 
                 ${isOptionSelected ? 'selected' : ''}
-                ${isHighlighted ? 'highlighted' : ''}`}
-          
+                ${isHighlighted ? 'highlighted' : ''}`}          
               onClick={(e) => {
                 e.stopPropagation();
                 handleOptionSelect(option);
                 setIsMenuOpened(false);
               }}
-
               onMouseEnter={() => {handleOptionsOnMouseEnter(index)}}
             >
               {label}
