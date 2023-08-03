@@ -106,8 +106,8 @@ const DropdownMenu = ({
     handleHighlightedOptionSelect(index);
   }
 
-  const handleSelectedOptionsRender = () => {
-    const SelectedOptions = selectedOptions.map((selectedOption) => {
+  const SelectedOptions = () => {
+    return selectedOptions.map((selectedOption) => {
       if (!selectedOption) {
         return [];
       }
@@ -126,9 +126,7 @@ const DropdownMenu = ({
           <span className='remove-btn'>&times;</span>
         </button>
       )
-    });
-
-    return SelectedOptions;
+    });;
   };
 
   return (
@@ -140,7 +138,7 @@ const DropdownMenu = ({
       onBlur={handleDropdownMenuClose}
     >
       <span className='selected-options'>
-        {handleSelectedOptionsRender()}
+        <SelectedOptions />
       </span>
 
       <button 
