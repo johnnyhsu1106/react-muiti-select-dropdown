@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import DropdownMenu from './DropdownMenu';
+import DropdownMenu from './components/DropdownMenu';
 import options from './options.json'
 
 import './App.css'

@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react';
+import style from './DropdownMenu.module.css';
+
 
 const DropdownMenu = ({
   options,
@@ -115,7 +117,7 @@ const DropdownMenu = ({
       
       return (
         <button 
-          className='option-badge'
+          className={style['option-badge']}
           key={value}
           onClick={(e) => {
             e.stopPropagation();
@@ -123,7 +125,7 @@ const DropdownMenu = ({
           }}
         >
           {label}
-          <span className='remove-btn'>&times;</span>
+          <span className={style['remove-btn']}>&times;</span>
         </button>
       )
     });;
@@ -131,27 +133,27 @@ const DropdownMenu = ({
 
   return (
     <div 
-      className='container'
+      className={style.container}
       tabIndex={0}
       ref={containerRef}
       onClick={handleDropdownMenuToggle}
       onBlur={handleDropdownMenuClose}
     >
-      <span className='selected-options'>
+      <span className={style['selected-options']}>
         <SelectedOptions />
       </span>
 
       <button 
-        className='clear-btn'
+        className={style['clear-btn']}
         onClick={handleSelectedOptionsClear}
       >
         &times;
       </button>
-      <div className='divider'/>
-      <div className='caret'/>
+      <div className={style.divider}/>
+      <div className={style.caret}/>
 
       <ul 
-        className={`options ${isMenuOpened ? 'visible' : ''}`}>
+        className={`${style.options} ${isMenuOpened ? `${style.visible}` : ''}`}>
         
         {options.map((option, index) => {
           const { label, value } = option;
@@ -161,9 +163,9 @@ const DropdownMenu = ({
           return (
             <li 
               key={value}
-              className={`option 
-                ${isOptionSelected ? 'selected' : ''}
-                ${isHighlighted ? 'highlighted' : ''}`}          
+              className={`${style.option} 
+                ${isOptionSelected ? `${style.selected}` : ''}
+                ${isHighlighted ? `${style.highlighted}` : ''}`}          
               onClick={(e) => {
                 e.stopPropagation();
                 handleOptionSelect(option);
